@@ -1,0 +1,79 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form {
+    margin-top: -1.6875rem;
+    display: flex;
+    gap: 0.5rem;
+    width: 46rem;
+}
+
+.form input {
+    width: 39.875rem;
+    height: 3.375rem;
+    border-radius: 8px;
+    padding: 1rem;
+    background: var(--gray-500);
+    color: var(--gray-300);
+    border: 0;
+}
+
+.form button[type="submit"] {
+    width: 5.625rem;
+    height: 3.375rem;
+    background: var(--blue-dark);
+    color: var(--gray-100);
+    border: 0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    cursor: pointer;
+}
+
+.main {
+    margin-top: 4rem;
+    width: 46rem;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.main .head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 19px;
+    width: 100%;
+}
+
+.main .head p:first-child {
+    color: var(--blue);
+}
+
+.main .head p:last-child {
+    color: var(--purple);
+}
+
+.main .head p span {
+    border-radius: 10px;
+    background: var(--gray-400);
+    color: var(--gray-200);
+    padding: 0.125rem 0.5rem 0.125rem 0.5rem;
+}
+
+.main .content {
+    margin-top: 1.5rem;
+    width: 100%;
+    border-top: 1px solid var(--gray-400);
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
