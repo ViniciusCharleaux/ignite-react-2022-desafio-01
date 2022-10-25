@@ -35,6 +35,11 @@
     cursor: pointer;
 }
 
+.form button[type="submit"]:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
 .main {
     margin-top: 4rem;
     width: 46rem;

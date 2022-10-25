@@ -18,6 +18,8 @@ export function App() {
   const [newTodo, setNewTodo] = useState('');
   const [toDoList, setToDoList] = useState<ToDoProps[]>([]);
 
+  const isAllowedToCreate = newTodo.length === 0
+
   const num = toDoList.filter((task) => {
     if (task.isCompleted) {
       return task
@@ -67,7 +69,7 @@ export function App() {
           onChange={(e) => setNewTodo(e.target.value)}
           value={newTodo}
         />
-        <button type='submit'>Criar < PlusCircle /></button>
+        <button type='submit' disabled={isAllowedToCreate}>Criar < PlusCircle /></button>
       </form>
 
       <main className={styles.main}>
