@@ -4,10 +4,12 @@ import styles from './App.module.css';
 import { PlusCircle } from 'phosphor-react'
 import { FormEvent, useState } from 'react';
 import { Task } from './components/Task'
+import { v4 as uuidv4 } from 'uuid'
 
 interface ToDoProps {
   content: string;
-  isCompleted: boolean
+  isCompleted: boolean;
+  id: string;
 }
 
 export function App() {
@@ -15,20 +17,42 @@ export function App() {
   const [newTodo, setNewTodo] = useState('');
   const [toDoList, setToDoList] = useState<ToDoProps[]>([]);
 
+  const num = toDoList.filter((task) => {
+    if (task.isCompleted) {
+      return task
+    }
+  })
+
   function handleNewTodo(event: FormEvent) {
     event.preventDefault();
 
     const toDo: ToDoProps = {
       content: newTodo,
-      isCompleted: false
+      isCompleted: false,
+      id: uuidv4()
     }
 
     setToDoList([...toDoList, toDo])
     setNewTodo('')
   }
 
-  function handleCompleteTask() {
+  function handleDeleteTask(idToDelete: string) {
+    const updatedtask = toDoList.filter((task) => {
+      return task.id !== idToDelete
+    })
 
+    setToDoList(updatedtask)
+  }
+
+  function handleCompleteTask(idToComplete: string) {
+    const updatedTask = toDoList.map((task) => {
+      if (task.id === idToComplete) {
+        return { ...task, isCompleted: !task.isCompleted }
+      }
+      return task
+    })
+
+    setToDoList(updatedTask)
   }
 
   return (
@@ -50,7 +74,7 @@ export function App() {
           <p>Tarefas criadas <span>{toDoList.length}</span></p>
 
           {toDoList.length > 0 ? (
-            <p>Concluidas <span>{`${0}/${toDoList.length}`}</span></p>
+            <p>Concluidas <span>{`${num.length} de ${toDoList.length}`}</span></p>
           ) :
             <p>Concluidas <span>{toDoList.length}</span></p>
           }
@@ -59,10 +83,13 @@ export function App() {
         </div>
 
         <div className={styles.content}>
-          {toDoList.map((todo) => (
+          {toDoList.map((task) => (
             <Task
-              content={todo.content}
-              isCompleted={true}
+              key={task.id}
+              content={task.content}
+              id={task.id}
+              onCompleteTask={handleCompleteTask}
+              OnDeleteTask={handleDeleteTask}
             />
           ))}
         </div>

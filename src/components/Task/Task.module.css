@@ -9,6 +9,13 @@
     border-radius: 8px;
 }
 
+.task .text {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+}
+
 .task input[type="checkbox"] {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -43,4 +50,8 @@
 
 .task button svg {
     color: var(--gray-300);
+}
+
+.isCompleted {
+    text-decoration: line-through;
 }

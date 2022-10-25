@@ -4,21 +4,34 @@ import { Trash } from 'phosphor-react'
 
 interface TaskProps {
     content: string;
-    isCompleted: boolean
+    id: string;
+    OnDeleteTask: (id: string) => void;
+    onCompleteTask: (id: string) => void
 }
 
-export function Task({ content, isCompleted }: TaskProps) {
+export function Task({ content, id, OnDeleteTask, onCompleteTask }: TaskProps) {
 
     const [isChecked, setIsChecked] = useState(false)
 
+    function handleDeleteTask() {
+        OnDeleteTask(id)
+    }
+
+    function handleCompleteTask() {
+        setIsChecked(!isChecked)
+        onCompleteTask(id)
+    }
 
     return (
         <div className={styles.task}>
-            <input type="checkbox" checked={isChecked} onChange={() => setIsChecked(!isChecked)} />
-            <p>{content}</p>
-            <button>
+            <div className={styles.text}>
+                <input type="checkbox" checked={isChecked} onChange={handleCompleteTask} />
+                <p className={isChecked ? styles.isCompleted : ''}>{content}</p>
+            </div>
+
+            <button onClick={handleDeleteTask}>
                 <Trash size={20} />
             </button>
-        </div>
+        </div >
     )
 }
