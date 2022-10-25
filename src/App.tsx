@@ -5,6 +5,7 @@ import { PlusCircle } from 'phosphor-react'
 import { FormEvent, useState } from 'react';
 import { Task } from './components/Task'
 import { v4 as uuidv4 } from 'uuid'
+import { EmptyList } from './components/EmptyList';
 
 interface ToDoProps {
   content: string;
@@ -78,20 +79,26 @@ export function App() {
           ) :
             <p>Concluidas <span>{toDoList.length}</span></p>
           }
-
-
         </div>
 
         <div className={styles.content}>
-          {toDoList.map((task) => (
-            <Task
-              key={task.id}
-              content={task.content}
-              id={task.id}
-              onCompleteTask={handleCompleteTask}
-              OnDeleteTask={handleDeleteTask}
-            />
-          ))}
+
+          {toDoList.length > 0 ?
+            toDoList.map((task) => (
+              <Task
+                key={task.id}
+                content={task.content}
+                id={task.id}
+                onCompleteTask={handleCompleteTask}
+                OnDeleteTask={handleDeleteTask}
+              />
+            ))
+            : (
+              <EmptyList />
+            )
+          }
+
+
         </div>
       </main>
 
